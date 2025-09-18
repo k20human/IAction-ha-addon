@@ -1,0 +1,4 @@
+﻿name: "IAction Add-ons Repository"
+url: "https://github.com/lfpoulain/iaction-ha-addon"
+maintainer: "lfpoulain"
+description: "Home Assistant add-ons for IAction - AI powered image analysis"

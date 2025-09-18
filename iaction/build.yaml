@@ -1,0 +1,7 @@
+build_from:
+  amd64: "docker.io/library/python:3.11"
+  aarch64: "docker.io/library/python:3.11"
+  armv7: "docker.io/library/python:3.11"
+
+# Optional build arguments (kept empty for now to avoid behavior changes)
+args: {}

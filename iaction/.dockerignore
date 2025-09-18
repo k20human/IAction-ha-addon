@@ -1,0 +1,20 @@
+# Reduce build context for the add-on image
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.git/
+.github/
+.gitignore
+.gitattributes
+Dockerfile*
+README.md
+repository.yaml
+
+# Node/JS caches if any
+node_modules/
+.npm/
+
+# Editor/OS files
+.DS_Store
+Thumbs.db

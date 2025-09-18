@@ -1,0 +1,21 @@
+name: IAction
+slug: iaction
+version: "1.1"
+description: "Image analysis (RTSP or HA polling) with AI + MQTT, web UI, and Home Assistant integration"
+url: "https://github.com/lfpoulain/iaction-ha-addon"
+auth_api: false
+homeassistant_api: false
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+init: false
+ingress: false
+webui: "http://[HOST]:[PORT:5002]"
+panel_icon: mdi:camera
+panel_title: IAction
+map:
+  - data:rw
+ports:
+  5002/tcp: 5002

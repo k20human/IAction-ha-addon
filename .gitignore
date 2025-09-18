@@ -1,0 +1,23 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+
+# Editors/IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Node (if any UI tooling is added later)
+node_modules/
+
+# Home Assistant add-on build artifacts
+*.tar
+*.zip
+.claude/settings.local.json
