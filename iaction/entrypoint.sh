@@ -82,19 +82,14 @@ if [ ! -f "/data/detections.json" ]; then
 fi
 ln -sf "/data/detections.json" "/app/detections.json"
 
-# Try to update source code to latest on container start (non-fatal)
+# Update source code to latest without generating FF errors (non-fatal)
 if command -v git >/dev/null 2>&1 && [ -d "/app/.git" ]; then
-  log "Attempting git pull to update IAction..."
+  log "Updating IAction to origin/main..."
   git config --global --add safe.directory /app || true
-  if (cd /app && git pull --ff-only); then
-    log "Git update complete"
+  if (cd /app && git fetch --depth 1 origin main && git reset --hard origin/main); then
+    log "Update complete"
   else
-    log "Fast-forward pull failed (force-push or divergence). Attempting hard reset to origin/main..."
-    if (cd /app && git fetch --depth 1 origin main && git reset --hard origin/main); then
-      log "Hard reset to origin/main complete"
-    else
-      log "Git update failed or no network; continuing with existing code"
-    fi
+    log "Update skipped (network/repo issue); continuing with existing code"
   fi
 else
   log "Skipping git update (git not available or /app is not a git repo)"
