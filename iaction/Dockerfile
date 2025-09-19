@@ -16,7 +16,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create app directory & fetch source code
 WORKDIR /app
-RUN git clone --depth 1 https://github.com/lfpoulain/IAction.git .
+ARG REFRESHED_AT=unknown
+RUN echo "Cache bust: ${REFRESHED_AT}" && \
+    git clone --depth 1 https://github.com/lfpoulain/IAction.git . && \
+    rm -rf .git
 
 # Create and populate virtual environment
 RUN python -m venv /opt/venv
