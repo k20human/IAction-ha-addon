@@ -86,9 +86,16 @@ ln -sf "/data/detections.json" "/app/detections.json"
 if command -v git >/dev/null 2>&1 && [ -d "/app/.git" ]; then
   log "Attempting git pull to update IAction..."
   git config --global --add safe.directory /app || true
-  (cd /app && git pull --ff-only) && \
-    log "Git update complete" || \
-    log "Git pull failed or no network; continuing with existing code"
+  if (cd /app && git pull --ff-only); then
+    log "Git update complete"
+  else
+    log "Fast-forward pull failed (force-push or divergence). Attempting hard reset to origin/main..."
+    if (cd /app && git fetch --depth 1 origin main && git reset --hard origin/main); then
+      log "Hard reset to origin/main complete"
+    else
+      log "Git update failed or no network; continuing with existing code"
+    fi
+  fi
 else
   log "Skipping git update (git not available or /app is not a git repo)"
 fi
