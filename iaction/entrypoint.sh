@@ -82,6 +82,17 @@ if [ ! -f "/data/detections.json" ]; then
 fi
 ln -sf "/data/detections.json" "/app/detections.json"
 
+# Try to update source code to latest on container start (non-fatal)
+if command -v git >/dev/null 2>&1 && [ -d "/app/.git" ]; then
+  log "Attempting git pull to update IAction..."
+  git config --global --add safe.directory /app || true
+  (cd /app && git pull --ff-only) && \
+    log "Git update complete" || \
+    log "Git pull failed or no network; continuing with existing code"
+else
+  log "Skipping git update (git not available or /app is not a git repo)"
+fi
+
 log "Starting IAction application..."
 
 # Start the main application
