@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create app directory & fetch source code
 WORKDIR /app
-RUN git clone --depth 1 https://github.com/lfpoulain/IAction.git .
+RUN git clone --depth 1 https://github.com/k20human/IAction.git .
 
 # Create and populate virtual environment
 RUN python -m venv /opt/venv
